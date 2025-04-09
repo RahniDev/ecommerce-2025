@@ -1,8 +1,8 @@
-const formidable = require('formidable')
-const _ = require('lodash')
-const fs = require('fs')
-const Product = require('../models/product')
-const { errorHandler } = require('../helpers/dbErrorHandler')
+import formidable from 'formidable'
+import _ from 'lodash'
+import fs from 'fs'
+import Product from '../models/product'
+import { errorHandler } from '../helpers/dbErrorHandler'
 
 exports.productById = (req, res, next, id) => {
     Product.findById(id)

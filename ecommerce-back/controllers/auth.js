@@ -1,7 +1,7 @@
-const User = require('../models/user');
-const jwt = require('jsonwebtoken'); // to generate signed token
-const expressJwt = require('express-jwt'); // for authorization check
-const { errorHandler } = require('../helpers/dbErrorHandler');
+import User from '../models/user';
+import jwt from 'jsonwebtoken'; // to generate signed token
+import expressJwt from 'express-jwt'; // for authorization check
+import { errorHandler } from '../helpers/dbErrorHandler';
 
 // using promise
 exports.signup = (req, res) => {

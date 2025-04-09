@@ -1,6 +1,6 @@
-const Category = require('../models/category');
-const Product = require('../models/product');
-const { errorHandler } = require('../helpers/dbErrorHandler');
+import Category from '../models/category';
+import Product from '../models/product';
+import { errorHandler } from '../helpers/dbErrorHandler';
 
 exports.categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) => {

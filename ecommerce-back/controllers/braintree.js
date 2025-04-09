@@ -1,5 +1,5 @@
-const User = require("../models/user")
-const braintree = require("braintree")
+import User from "../models/user"
+import braintree from "braintree"
 require('dotenv').config()
 
 // connect to braintree

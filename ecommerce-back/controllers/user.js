@@ -1,6 +1,6 @@
-const User = require('../models/user');
-const { Order } = require('../models/order');
-const { errorHandler } = require('../helpers/dbErrorHandler');
+import User from '../models/user';
+import { Order } from '../models/order';
+import { errorHandler } from '../helpers/dbErrorHandler';
 
 exports.userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {

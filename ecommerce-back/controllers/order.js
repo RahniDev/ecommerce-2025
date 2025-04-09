@@ -1,5 +1,6 @@
-const { Order, CartItem } = require('../models/order');
-const { errorHandler } = require('../helpers/dbErrorHandler');
+import { Order, CartItem } from '../models/order';
+import { errorHandler } from '../helpers/dbErrorHandler';
+
 require('dotenv').config()
 // sendgrid for email npm i @sendgrid/mail
 const sgMail = require('@sendgrid/mail');
