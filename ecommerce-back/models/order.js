@@ -1,8 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const { ObjectId } = mongoose.Schema;
- 
-const CartItemSchema = new mongoose.Schema(
+import mongoose, { Schema, ObjectId } from "mongoose";
+
+const CartItemSchema = new Schema(
   {
     product: { type: ObjectId, ref: "Product" },
     name: String,
@@ -11,10 +9,10 @@ const CartItemSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
- 
+
 const CartItem = mongoose.model("CartItem", CartItemSchema);
- 
-const OrderSchema = new mongoose.Schema(
+
+const OrderSchema = new Schema(
   {
     products: [CartItemSchema],
     transaction_id: {},
@@ -30,7 +28,7 @@ const OrderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
- 
+
 const Order = mongoose.model("Order", OrderSchema);
- 
-module.exports = { Order, CartItem };
+
+export default { Order, CartItem };

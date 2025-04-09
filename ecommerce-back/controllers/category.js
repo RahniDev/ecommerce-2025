@@ -1,8 +1,8 @@
-import Category from '../models/category';
-import Product from '../models/product';
-import { errorHandler } from '../helpers/dbErrorHandler';
+import Category from '../models/category.js';
+import Product from '../models/product.js';
+import { errorHandler } from '../helpers/dbErrorHandler.js';
 
-exports.categoryById = (req, res, next, id) => {
+export const categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) => {
         if (err || !category) {
             return res.status(400).json({
@@ -14,7 +14,7 @@ exports.categoryById = (req, res, next, id) => {
     });
 };
 
-exports.create = (req, res) => {
+export const create = (req, res) => {
     const category = new Category(req.body);
     category.save((err, data) => {
         if (err) {
@@ -26,11 +26,11 @@ exports.create = (req, res) => {
     });
 };
 
-exports.read = (req, res) => {
+export const read = (req, res) => {
     return res.json(req.category);
 };
 
-exports.update = (req, res) => {
+export const update = (req, res) => {
     console.log('req.body', req.body);
     console.log('category update param', req.params.categoryId);
 
@@ -46,7 +46,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.remove = (req, res) => {
+export const remove = (req, res) => {
     const category = req.category;
     Product.find({ category }).exec((err, data) => {
         if (data.length >= 1) {
@@ -68,7 +68,7 @@ exports.remove = (req, res) => {
     });
 };
 
-exports.list = (req, res) => {
+export const list = (req, res) => {
     Category.find().exec((err, data) => {
         if (err) {
             return res.status(400).json({

@@ -1,12 +1,12 @@
-import { Order, CartItem } from '../models/order';
-import { errorHandler } from '../helpers/dbErrorHandler';
+import { Order, CartItem } from '../models/order.js';
+import { errorHandler } from '../helpers/dbErrorHandler.js';
 
 require('dotenv').config()
 // sendgrid for email npm i @sendgrid/mail
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID);
 
-exports.orderById = (req, res, next, id) => {
+export const orderById = (req, res, next, id) => {
     Order.findById(id)
         .populate('products.product', 'name price')
         .exec((err, order) => {
@@ -20,7 +20,7 @@ exports.orderById = (req, res, next, id) => {
         });
 };
 
-exports.create = (req, res) => {
+export const create = (req, res) => {
     console.log('CREATE ORDER: ', req.body);
     req.body.order.user = req.profile;
     const order = new Order(req.body.order);
@@ -46,16 +46,16 @@ exports.create = (req, res) => {
         `
         };
         sgMail
-        .send(emailData)
-        .then(sent => console.log('SENT >>>', sent))
-        .catch(err => console.log('ERR >>>', err));
+            .send(emailData)
+            .then(sent => console.log('SENT >>>', sent))
+            .catch(err => console.log('ERR >>>', err));
 
-    // email to buyer
-    const emailData2 = {
-        to: order.user.email,
-        from: 'rahnidemeis@gmail.com',
-        subject: `You order is in process`,
-        html: `
+        // email to buyer
+        const emailData2 = {
+            to: order.user.email,
+            from: 'rahnidemeis@gmail.com',
+            subject: `You order is in process`,
+            html: `
         <h1>Hey ${req.profile.name}, Thank you for shopping with us.</h1>
         <h2>Total products: ${order.products.length}</h2>
         <h2>Transaction ID: ${order.transaction_id}</h2>
@@ -63,28 +63,28 @@ exports.create = (req, res) => {
         <h2>Product details:</h2>
         <hr />
         ${order.products
-            .map(p => {
-                return `<div>
+                    .map(p => {
+                        return `<div>
                     <h3>Product Name: ${p.name}</h3>
                     <h3>Product Price: £${p.price}</h3>
                     <h3>Product Quantity: ${p.count}</h3>
             </div>`;
-            })
-            .join('--------------------')}
+                    })
+                    .join('--------------------')}
         <h2>Total order cost: ${order.amount}<h2>
         <p>Thank your for shopping with us.</p>
     `
-    };
-    sgMail
-        .send(emailData2)
-        .then(sent => console.log('SENT 2 >>>', sent))
-        .catch(err => console.log('ERR 2 >>>', err));
+        };
+        sgMail
+            .send(emailData2)
+            .then(sent => console.log('SENT 2 >>>', sent))
+            .catch(err => console.log('ERR 2 >>>', err));
 
-    res.json(data);
-});
+        res.json(data);
+    });
 };
 
-exports.listOrders = (req, res) => {
+export const listOrders = (req, res) => {
     Order.find()
         .populate('user', '_id name address')
         .sort('-created')
@@ -98,11 +98,11 @@ exports.listOrders = (req, res) => {
         });
 };
 
-exports.getStatusValues = (req, res) => {
+export const getStatusValues = (req, res) => {
     res.json(Order.schema.path('status').enumValues);
 };
 
-exports.updateOrderStatus = (req, res) => {
+export const updateOrderStatus = (req, res) => {
     Order.update({ _id: req.body.orderId }, { $set: { status: req.body.status } }, (err, order) => {
         if (err) {
             return res.status(400).json({

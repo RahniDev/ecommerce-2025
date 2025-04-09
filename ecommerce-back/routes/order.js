@@ -1,16 +1,16 @@
 import express from 'express'
 const router = express.Router();
 
-const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
-const { userById, addOrderToUserHistory } = require("../controllers/user");
-const {
+import { requireSignin, isAuth, isAdmin } from "../controllers/auth.js";
+import { userById, addOrderToUserHistory } from "../controllers/user.js";
+import {
     create,
     listOrders,
     getStatusValues,
     orderById,
     updateOrderStatus
-} = require("../controllers/order");
-const { decreaseQuantity } = require("../controllers/product");
+} from "../controllers/order.js";
+import { decreaseQuantity } from "../controllers/product.js";
 
 router.post(
     "/order/create/:userId",
@@ -40,4 +40,4 @@ router.put(
 router.param("userId", userById);
 router.param("orderId", orderById);
 
-module.exports = router;
+export default router;

@@ -1,10 +1,10 @@
-import User from '../models/user';
+import User from '../models/user.js';
 import jwt from 'jsonwebtoken'; // to generate signed token
-import expressJwt from 'express-jwt'; // for authorization check
-import { errorHandler } from '../helpers/dbErrorHandler';
+import {expressjwt} from 'express-jwt'; // for authorization check
+import { errorHandler } from '../helpers/dbErrorHandler.js';
 
 // using promise
-exports.signup = (req, res) => {
+export const signup = (req, res) => {
     // console.log("req.body", req.body);
     const user = new User(req.body);
     user.save((err, user) => {
@@ -23,7 +23,7 @@ exports.signup = (req, res) => {
 };
 
 
-exports.signin = (req, res) => {
+export const signin = (req, res) => {
     // find the user based on email
     const { email, password } = req.body;
     User.findOne({ email }, (err, user) => {
@@ -49,17 +49,18 @@ exports.signin = (req, res) => {
     });
 };
 
-exports.signout = (req, res) => {
+export const signout = (req, res) => {
     res.clearCookie('t');
     res.json({ message: 'Signout success' });
 };
 
-exports.requireSignin = expressJwt({
+export const requireSignin = expressjwt({
     secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"],
     userProperty: 'auth'
 });
 
-exports.isAuth = (req, res, next) => {
+export const isAuth = (req, res, next) => {
     let user = req.profile && req.auth && req.profile._id == req.auth._id;
     if (!user) {
         return res.status(403).json({
@@ -69,7 +70,7 @@ exports.isAuth = (req, res, next) => {
     next();
 };
 
-exports.isAdmin = (req, res, next) => {
+export const isAdmin = (req, res, next) => {
     if (req.profile.role === 0) {
         return res.status(403).json({
             error: 'Admin resourse! Access denied'

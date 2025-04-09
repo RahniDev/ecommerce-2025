@@ -1,9 +1,9 @@
 import express from 'express'
 const router = express.Router()
 
-const { requireSignin, isAuth, isAdmin } = require('../controllers/auth')
-const { create, categoryById, read, update, remove, list } = require("../controllers/category");
-const { userById } = require('../controllers/user')
+import { requireSignin, isAuth, isAdmin } from '../controllers/auth.js'
+import { create, categoryById, read, update, remove, list } from "../controllers/category.js";
+import { userById } from '../controllers/user.js'
 
 
 router.get('/category/:categoryId', read)
@@ -16,4 +16,4 @@ router.get('/categories/', list)
 router.param('categoryId', categoryById)
 router.param('userId', userById)
 
-module.exports = router;
+export default router;

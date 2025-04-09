@@ -1,8 +1,8 @@
-import User from '../models/user';
-import { Order } from '../models/order';
-import { errorHandler } from '../helpers/dbErrorHandler';
+import User from '../models/user.js';
+import Order from '../models/order.js';
+import { errorHandler } from '../helpers/dbErrorHandler.js';
 
-exports.userById = (req, res, next, id) => {
+export const userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
@@ -14,7 +14,7 @@ exports.userById = (req, res, next, id) => {
     });
 };
 
-exports.read = (req, res) => {
+export const read = (req, res) => {
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
     return res.json(req.profile);
@@ -35,7 +35,7 @@ exports.read = (req, res) => {
 //     });
 // };
 
-exports.update = (req, res) => {
+export const update = (req, res) => {
     // console.log('UPDATE USER - req.user', req.user, 'UPDATE DATA', req.body);
     const { name, password } = req.body;
 
@@ -77,7 +77,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.addOrderToUserHistory = (req, res, next) => {
+export const addOrderToUserHistory = (req, res, next) => {
     let history = [];
 
     req.body.order.products.forEach(item => {
@@ -102,7 +102,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
     });
 };
 
-exports.purchaseHistory = (req, res) => {
+export const purchaseHistory = (req, res) => {
     Order.find({ user: req.profile._id })
         .populate('user', '_id name')
         .sort('-created')

@@ -2,9 +2,10 @@ import express from 'express'
 
 const router = express.Router()
 
-const { requireSignin, isAuth, isAdmin } = require('../controllers/auth')
+import { requireSignin, isAuth, isAdmin } from '../controllers/auth.js'
 // crud operations
-const { create,
+import {
+    create,
     productById,
     read,
     remove,
@@ -14,8 +15,9 @@ const { create,
     listCategories,
     listBySearch,
     photo,
-    listSearch } = require("../controllers/product");
-const { userById } = require('../controllers/user')
+    listSearch
+} from "../controllers/product.js";
+import { userById } from '../controllers/user.js'
 
 router.get('/product/:productId', read) // -> get single post 
 router.post("/product/create/:userId", requireSignin, isAuth, isAdmin, create); // -> create single post
@@ -33,5 +35,5 @@ router.get('/product/photo/:productId', photo) // -> get photo of single post
 router.param('userId', userById)
 router.param('productId', productById)
 
-module.exports = router
+export default router
 
