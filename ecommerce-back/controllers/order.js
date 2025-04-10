@@ -1,9 +1,9 @@
-import { Order, CartItem } from '../models/order.js';
+import Order from '../models/order.js';
 import { errorHandler } from '../helpers/dbErrorHandler.js';
-
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 // sendgrid for email npm i @sendgrid/mail
-const sgMail = require('@sendgrid/mail');
+import sgMail from '@sendgrid/mail';
 sgMail.setApiKey(process.env.SENDGRID);
 
 export const orderById = (req, res, next, id) => {

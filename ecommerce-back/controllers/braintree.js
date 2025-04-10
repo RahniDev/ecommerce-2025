@@ -1,9 +1,11 @@
 import User from "../models/user.js"
 import braintree from "braintree"
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
+ 
 // connect to braintree
-export const gateway = braintree.connect({
+export const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
     merchantId: process.env.BRAINTREE_MERCHANT_ID,
     publicKey: process.env.BRAINTREE_PUBLIC_KEY,

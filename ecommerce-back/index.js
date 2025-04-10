@@ -20,8 +20,9 @@ mongoose.set("strictQuery", false)
 mongoose.connect(process.env.DATABASE)
 .then(() => console.log('DB connected'))
 
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 app.use(morgan('dev'))
-app.use(bodyParser.json())
 // used to save users credentials
 app.use(cookieParser())
 app.use(expressValidator())

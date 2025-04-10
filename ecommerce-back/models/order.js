@@ -1,8 +1,8 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const CartItemSchema = new Schema(
   {
-    product: { type: ObjectId, ref: "Product" },
+    product: { type: Schema.Types.ObjectId, ref: "Product" },
     name: String,
     price: Number,
     count: Number
@@ -10,9 +10,10 @@ const CartItemSchema = new Schema(
   { timestamps: true }
 );
 
-const CartItem = mongoose.model("CartItem", CartItemSchema);
+export const CartItem = mongoose.model("CartItem", CartItemSchema);
 
-const OrderSchema = new Schema(
+
+const orderSchema = new Schema(
   {
     products: [CartItemSchema],
     transaction_id: {},
@@ -24,11 +25,12 @@ const OrderSchema = new Schema(
       enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"] // enum means string objects
     },
     updated: Date,
-    user: { type: ObjectId, ref: "User" }
+    user: { type: Schema.Types.ObjectId, ref: "User" }
   },
   { timestamps: true }
 );
 
-const Order = mongoose.model("Order", OrderSchema);
+ 
+const Order = mongoose.model("Order", orderSchema);
 
-export default { Order, CartItem };
+export default Order
