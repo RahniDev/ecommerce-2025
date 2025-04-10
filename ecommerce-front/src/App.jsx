@@ -9,6 +9,9 @@ const App = () => {
       <h1>True Being Wellness</h1>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/shop" element={<Shop />} />
         <AdminRoute path="/create/product" exact element={<AddProduct />} />
         <AdminRoute path="/create/category" exact element={<AddCategory />} />
         <AdminRoute path="/admin/orders" exact element={<Orders />} />
