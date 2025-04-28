@@ -135,7 +135,7 @@ export const list = (req, res) => {
         .populate('category')
         .sort([[sortBy, order]])
         .limit(limit)
-        .exec((err, products) => {
+        .then((err, products) => {
             if (err) {
                 return res.status(400).json({
                     error: 'Products not found'

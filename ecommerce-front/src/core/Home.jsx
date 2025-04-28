@@ -3,19 +3,19 @@ import { getProducts } from "./apiCore";
 import Nav from './Nav'
 
 const Home = () => {
-  // const [productsBySell, setProductsBySell] = useState([]);
+   const [productsBySell, setProductsBySell] = useState([]);
   // const [productsByArrival, setProductsByArrival] = useState([]);
   // const [error, setError] = useState(false);
 
-  // const loadProductsBySell = () => {
-  //   getProducts("sold").then(data => {
-  //     if (data.error) {
-  //       setError(data.error);
-  //     } else {
-  //       setProductsBySell(data);
-  //     }
-  //   });
-  // };
+  const loadProductsBySell = () => {
+    getProducts("sold").then(() => {
+      // if (data.error) {
+      //   setError(data.error);
+      // } else {
+      //   setProductsBySell(data);
+      // }
+    });
+  };
 
   // const loadProductsByArrival = () => {
   //   getProducts("createdAt").then(data => {
@@ -27,10 +27,10 @@ const Home = () => {
   //   });
   // };
 
-  // useEffect(() => {
+   useEffect(() => {
   //   loadProductsByArrival();
-  //   loadProductsBySell();
-  // }, []);
+     loadProductsBySell();
+   }, []);
 
   return (
     <div>
@@ -46,11 +46,11 @@ const Home = () => {
 
       <h2 className="text-center">Best Sellers</h2>
       <div className="row">
-        {/* {productsBySell.map((product, i) => (
+        {productsBySell.map((product, i) => (
           <div key={i} className="col-4 mb-3">
             <Card product={product} />
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   )
