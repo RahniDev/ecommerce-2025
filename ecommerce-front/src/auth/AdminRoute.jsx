@@ -1,7 +1,22 @@
-const AdminRoute = () => {
-  return (
-    <div>AdminRoute</div>
-  )
-}
+import { Route, Navigate } from "react-router-dom";
+import { isAuthenticated } from "./index";
 
-export default AdminRoute
+const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            isAuthenticated() && isAuthenticated().user.role === 1 ? (
+                <Component {...props} />
+            ) : (
+                <Navigate
+                    to={{
+                        pathname: "/signin",
+                        state: { from: props.location }
+                    }}
+                />
+            )
+        }
+    />
+);
+
+export default AdminRoute;
