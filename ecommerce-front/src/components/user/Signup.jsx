@@ -22,7 +22,7 @@ const Signup = () => {
         setValues({ ...values, error: false });
         signup({ name, email, password })
             .then((data) => {
-                console.log("++ data: ", data);
+                console.log("data: ", data);
 
                 // if you need to check error from backend
                 // else all exceptions are captured in catch block
