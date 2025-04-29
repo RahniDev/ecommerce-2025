@@ -45,37 +45,37 @@ const Signup = () => {
             });
     };
     const signUpForm = () => (
-        <form>
-            <div className="form-group">
-                <label className="text-muted">Name</label>
+        <form className="auth-form">
+            <div className="input-container">
                 <input
                     onChange={handleChange("name")}
                     type="text"
                     className="form-control"
                     value={name}
+                    placeholder="Name"
                 />
             </div>
 
-            <div className="form-group">
-                <label className="text-muted">Email</label>
+            <div className="input-container">
                 <input
                     onChange={handleChange("email")}
                     type="email"
                     className="form-control"
                     value={email}
+                    placeholder="Email"
                 />
             </div>
 
-            <div className="form-group">
-                <label className="text-muted">Password</label>
+            <div className="input-container">
                 <input
                     onChange={handleChange("password")}
                     type="password"
                     className="form-control"
                     value={password}
+                    placeholder="Password"
                 />
             </div>
-            <button onClick={clickSubmit} className="btn btn-color btn-primary">
+            <button onClick={clickSubmit} className="submit-btn">
                 Submit
             </button>
         </form>

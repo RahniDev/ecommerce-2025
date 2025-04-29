@@ -4,8 +4,8 @@ import { signin, authenticate, isAuthenticated } from "../auth";
 
 const Signin = () => {
     const [values, setValues] = useState({
-        email: "email@gmail.com",
-        password: "password",
+        email: "",
+        password: "",
         error: "",
         loading: false,
         redirectToReferrer: false,
@@ -43,28 +43,29 @@ const Signin = () => {
     };
 
     const signUpForm = () => (
-        <form>
-            <div className="form-group">
-                <label className="text-muted">Email</label>
+        <form className="auth-form">
+            <h1>Sign In</h1>
+            <div className="input-container">
                 <input
                     onChange={handleChange("email")}
                     type="email"
                     className="form-control"
                     value={email}
+                    placeholder="Email"
                 />
             </div>
 
-            <div className="form-group">
-                <label className="text-muted">password</label>
+            <div className="input-container">
                 <input
                     onChange={handleChange("password")}
                     type="password"
                     className="form-control"
                     value={password}
+                    placeholder="Password"
                 />
             </div>
 
-            <button onClick={clickSubmit} className="btn btn-color btn-primary">
+            <button onClick={clickSubmit} className="submit-btn">
                 Submit
             </button>
         </form>
@@ -99,12 +100,12 @@ const Signin = () => {
     };
 
     return (
-        <div>
+        <>
             {showLoading()}
             {showError()}
             {signUpForm()}
             {redirectUser()}
-        </div>
+        </>
     )
 }
 

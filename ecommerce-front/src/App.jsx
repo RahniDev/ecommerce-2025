@@ -1,17 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
-import AdminRoute from './auth/AdminRoute.jsx'
-import Signin from './user/Signin.jsx'
-import Signup from './user/Signup.jsx'
-import Profile from './user/Profile.jsx'
-import Home from './core/Home.jsx'
-import Shop from './core/Shop.jsx'
+import AdminRoute from './components/auth/AdminRoute.jsx'
+import Signin from './components/user/Signin.jsx'
+import Signup from './components/user/Signup.jsx'
+import Profile from './components/user/Profile.jsx'
+import Home from './components/core/Home.jsx'
+import Shop from './components/core/Shop.jsx'
+import './main.css'
+
 // import PrivateRoute from "./auth/PrivateRoute";
 
 
 const App = () => {
   return (
     <>
-      <h1>True Being Wellness</h1>
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/signin" element={<Signin />} />
